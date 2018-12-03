@@ -1,5 +1,4 @@
 object Day01 extends AdventIO {
-
   implicit val s: String = Read("01.txt")
 
   def main(args: Array[String]): Unit = {
@@ -16,9 +15,10 @@ object Day01 extends AdventIO {
     val l = s.split('\n').map(_.toInt)
     var f, i = 0
     while (!e.contains(f)) {
-      e = e + f; f += l(i % l.length); i += 1
+      e = e + f
+      f += l(i % l.length)
+      i += 1
     }
     f
   }
-
 }
