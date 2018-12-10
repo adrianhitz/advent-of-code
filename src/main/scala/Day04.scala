@@ -14,7 +14,6 @@ object Day04 extends AdventIO {
 
   // Golf: ? bytes TODO
   def part2(implicit s: String): Int = {
-
     val dtf = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm")
     val t = s.split('\n').map(_.replace("[", "").split("] "))
       .map(x => (LocalDateTime.parse(x(0), dtf), x(1)))
@@ -67,6 +66,5 @@ object Day04 extends AdventIO {
     val chosenGuard = m.maxBy(_._2.sum)._1
     val chosenMinute = m.maxBy(_._2.sum)._2.zipWithIndex.maxBy(_._1)._2
     chosenGuard * chosenMinute
-
   }
 }
