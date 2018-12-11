@@ -33,13 +33,10 @@ object Day11 extends AdventIO {
       grid(x)(y) = ((((x + 10) * y + serial) * (x + 10)) / 100) % 10 - 5
     }
     val sums = Array.ofDim[Int](301, 301)
-
-    // TODO this can be sped up
     for(x <- 1 to 300) for(y <- 1 to 300) {
-      sums(x)(y) = grid.slice(0, x + 1).flatMap(_.slice(0, y + 1)).sum
+      sums(x)(y) = grid(x)(y) + sums(x - 1)(y) + sums(x)(y - 1) - sums(x - 1)(y - 1)
     }
-
-    var max = 0
+    var maxSum = 0
     var maxCoords = (0, 0)
     var maxSize = 0
     for(n <- 1 to 300) {
@@ -48,8 +45,8 @@ object Day11 extends AdventIO {
         val t = sums(x + (n - 1))(y - 1)
         val tl = sums(x - 1)(y - 1)
         val v = sums(x + (n - 1))(y + (n - 1)) - l - t + tl
-        if(v > max) {
-          max = v
+        if(v > maxSum) {
+          maxSum = v
           maxCoords = (x, y)
           maxSize = n
         }
