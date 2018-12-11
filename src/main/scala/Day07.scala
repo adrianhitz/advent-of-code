@@ -5,36 +5,30 @@ object Day07 extends AdventIO {
   implicit val s: String = Read("07.txt")
 
   def main(args: Array[String]): Unit = {
-    part1
-    // Write("07a.txt", part1.toString)
+    Write("07a.txt", part1)
     // Write("07b.txt", part2.toString)
   }
 
   // Golf: ? bytes TODO
-  def part1(implicit s: String): Unit = {
-    val reqs: Array[(Char, Char)] = s.split('\n').map(x => (x.charAt(5), x.charAt(36)))
-    val map = mutable.Map[Char, Set[Char]]()
-    for(req <- reqs) {
-      if(!map.contains(req._1)) map(req._1) = Set()
-      map(req._1) = map(req._1) + req._2
+  def part1(implicit s: String): String = {
+    val reqList: Array[(Char, Char)] = s.split('\n').map(x => (x.charAt(5), x.charAt(36)))
+    val reqs = mutable.Map[Char, Set[Char]]() // Map containing all required steps for a given step
+    for(req <- reqList) {
+      if(!reqs.contains(req._2)) reqs(req._2) = Set()
+      reqs(req._2) = reqs(req._2) + req._1
     }
-    for(key <- map.keys.toList.sorted) {
-      println(key + ": " + map(key).mkString(", "))
-    }
-    var start = map.keys.toSet
-    for((_, v) <- map) {
-      start = start diff v
-    }
-    var next = start
+    var nextSteps = reqs.values.flatten.toSet diff reqs.keys.toSet
     val completed = ListBuffer[Char]()
-    while(next.nonEmpty) {
-      val c = next.min
-      completed append c
-      if(map.contains(c)) next = next union map(c)
-      next = next diff completed.toSet
+    while(nextSteps.nonEmpty) {
+      val nextStep = nextSteps.min
+      completed append nextStep
+      nextSteps = nextSteps diff completed.toSet
+      completed.foreach(reqs.remove)
+      for((k, v) <- reqs) {
+        if(v.subsetOf(completed.toSet)) nextSteps += k
+      }
     }
-    println(completed.mkString(""))
-    println(completed.length)
+    completed.mkString("")
   }
 
   // Golf: ? bytes TODO
