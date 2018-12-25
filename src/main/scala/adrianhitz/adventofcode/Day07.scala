@@ -1,12 +1,12 @@
+package adrianhitz.adventofcode
+
 import scala.collection.mutable
 import scala.collection.mutable.ListBuffer
 
 object Day07 extends AdventIO {
-  implicit val s: String = Read("07.txt")
-
-  def main(args: Array[String]): Unit = {
-    Write("07a.txt", part1)
-    Write("07b.txt", part2.toString)
+  override def main(args: Array[String]): Unit = {
+    write1(part1)
+    write2(part2.toString)
   }
 
   // Golf: ? bytes TODO

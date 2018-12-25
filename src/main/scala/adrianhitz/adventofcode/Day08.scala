@@ -1,11 +1,9 @@
-import scala.collection.mutable.Stack
+package adrianhitz.adventofcode
 
 object Day08 extends AdventIO {
-  implicit val s: String = Read("08.txt")
-
-  def main(args: Array[String]): Unit = {
-    // Write("08a.txt", part1.toString)
-    // Write("08b.txt", part2.toString)
+  override def main(args: Array[String]): Unit = {
+    // write1(part1.toString)
+    // write2(part2.toString)
   }
 
   // Golf: ? bytes TODO

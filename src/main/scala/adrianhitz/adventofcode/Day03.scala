@@ -1,9 +1,9 @@
-object Day03 extends AdventIO {
-  implicit val s: String = Read("03.txt")
+package adrianhitz.adventofcode
 
-  def main(args: Array[String]): Unit = {
-    Write("03a.txt", part1.toString)
-    Write("03b.txt", part2.toString)
+object Day03 extends AdventIO {
+  override def main(args: Array[String]): Unit = {
+    write1(part1.toString)
+    write2(part2.toString)
   }
 
   // Golf: ? bytes TODO

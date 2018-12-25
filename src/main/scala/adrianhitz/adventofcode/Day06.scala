@@ -1,9 +1,9 @@
-object Day06 extends AdventIO {
-  implicit val s: String = Read("06.txt")
+package adrianhitz.adventofcode
 
-  def main(args: Array[String]): Unit = {
-    Write("06a.txt", part1.toString)
-    // Write("06b.txt", part2.toString)
+object Day06 extends AdventIO {
+  override def main(args: Array[String]): Unit = {
+    write1(part1.toString)
+    // write2(part2.toString)
   }
 
   // Golf: ? bytes TODO
@@ -15,7 +15,7 @@ object Day06 extends AdventIO {
     val width = yRange._2 - yRange._1 + 1
     val grid = Array.ofDim[Int](height, width)
     for(x <- 0 to height) for(y <- 0 to width) {
-      
+
     }
 
   }
