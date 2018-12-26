@@ -5,19 +5,14 @@ import java.io.{File, PrintWriter}
 import scala.io.Source
 
 /**
-  * Handles reading problem input and writing output from and to files for Advent of Code tasks. The extending class's
-  * name needs to contain two digits representing the day.
+  * Handles reading input from and writing output to files for Advent of Code tasks. The extending class's name needs to
+  * contain two digits representing the day.
   */
 trait AdventIO {
   /**
     * Problem input
     */
   protected implicit val input: String = read()
-
-  /**
-    * File name for this task (should be two digits, representing the day)
-    */
-  private def fileName: String = """\d\d""".r.findAllIn(this.getClass.getSimpleName).toList.head
 
   /**
     * Should solve the problems and call [[write1]] and [[write2]] to write the solutions to the output file.
@@ -47,6 +42,11 @@ trait AdventIO {
   }
 
   /**
+    * File name for this task (should be two digits, representing the day)
+    */
+  private def fileName: String = "\\d\\d".r.findAllIn(this.getClass.getSimpleName).toList.head
+
+  /**
     * Reads the problem input from the input file
     *
     * @return File contents
@@ -60,16 +60,16 @@ private object AdventIO {
   /**
     * Path to the directory containing the input files
     */
-  private val inputDirectory = """.\src\main\resources\aoc_input\"""
+  private val inputDirectory = ".\\src\\main\\resources\\aoc_input\\"
 
   /**
-    * Path to the directory where the output files will be created. Directories on the path will be created if they
-    * don't exist already.
+    * Path to the directory where the output files will be created
     */
-  private val outputDirectory = """.\aoc_output\"""
+  private val outputDirectory = ".\\aoc_output\\"
 
   /**
-    * Writes the given content to a file with the given file name in the [[AdventIO.outputDirectory]]
+    * Writes the given content to the [[outputDirectory]], into a file with the given name. Creates the necessary
+    * directories on the path if they don't already exist.
     *
     * @param fileName The file name
     * @param content  Content to be written to the file
