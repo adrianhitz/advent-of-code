@@ -4,24 +4,77 @@ import java.io.{File, PrintWriter}
 
 import scala.io.Source
 
+/**
+  * Handles reading problem input and writing output from and to files for Advent of Code tasks. The extending class's
+  * name needs to contain two digits representing the day.
+  */
 trait AdventIO {
-  private val fileName: String = """\d\d""".r.findAllIn(this.getClass.getSimpleName).toList.head
+  /**
+    * Problem input
+    */
   protected implicit val input: String = read()
 
+  /**
+    * File name for this task (should be two digits, representing the day)
+    */
+  private def fileName: String = """\d\d""".r.findAllIn(this.getClass.getSimpleName).toList.head
+
+  /**
+    * Should solve the problems and call [[write1]] and [[write2]] to write the solutions to the output file.
+    *
+    * @param args Array of command line arguments for the application
+    */
   def main(args: Array[String]): Unit
 
-  protected[this] def write1(s: String): Unit = AdventIO.write(fileName + "_1", s)
+  /**
+    * Writes the solution for part 1 to the console and an output file
+    *
+    * @param s Problem solution
+    */
+  protected[this] def write1(s: String): Unit = {
+    println(f"Solution for day $fileName%s, part 1:\n$s%s\n")
+    AdventIO.writeToFile(fileName + "_1", s)
+  }
 
-  protected[this] def write2(s: String): Unit = AdventIO.write(fileName + "_2", s)
+  /**
+    * Writes the solution for part 2 to the console and an output file
+    *
+    * @param s Problem solution
+    */
+  protected[this] def write2(s: String): Unit = {
+    println(f"Solution for day $fileName%s, part 2:\n$s%s\n")
+    AdventIO.writeToFile(fileName + "_2", s)
+  }
 
-  private[this] def read(): String = Source.fromFile(AdventIO.inputDirectory + fileName + ".txt").getLines().mkString("\n")
+  /**
+    * Reads the problem input from the input file
+    *
+    * @return File contents
+    */
+  private[this] def read(): String = {
+    Source.fromFile(AdventIO.inputDirectory + fileName + ".txt").getLines().mkString("\n")
+  }
 }
 
 private object AdventIO {
+  /**
+    * Path to the directory containing the input files
+    */
   private val inputDirectory = """.\src\main\resources\aoc_input\"""
+
+  /**
+    * Path to the directory where the output files will be created. Directories on the path will be created if they
+    * don't exist already.
+    */
   private val outputDirectory = """.\aoc_output\"""
 
-  private def write(fileName: String, content: String): Unit = {
+  /**
+    * Writes the given content to a file with the given file name in the [[AdventIO.outputDirectory]]
+    *
+    * @param fileName The file name
+    * @param content  Content to be written to the file
+    */
+  private def writeToFile(fileName: String, content: String): Unit = {
     val directory = new File(AdventIO.outputDirectory)
     if(!directory.exists()) {
       directory.mkdirs()
