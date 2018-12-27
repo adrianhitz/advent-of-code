@@ -6,19 +6,30 @@ object Day01 extends AdventIO {
     write2(part2.toString)
   }
 
-  // Golf: 30 bytes
+  // 30 bytes
   def part1(implicit s: String): Int = s.split('\n').map(_.toInt).sum
 
-  // Golf: 112 bytes
   def part2(implicit s: String): Int = {
-    var e = Set[Int]()
-    val l = s.split('\n').map(_.toInt)
-    var f, i = 0
-    while (!e.contains(f)) {
-      e = e + f
-      f += l(i % l.length)
+    var frequencies = Set[Int]()
+    val freqChanges = s.split('\n').map(_.toInt)
+    var currentFreq = 0
+    var i = 0
+    while(!frequencies.contains(currentFreq)) {
+      frequencies = frequencies + currentFreq
+      currentFreq += freqChanges(i % freqChanges.length)
       i += 1
     }
+    currentFreq
+  }
+
+  // 112 bytes
+  def part2golf(implicit s: String): Int = {
+    var e=Set[Int]()
+    val l=s.split('\n').map(_.toInt)
+    var f,i=0
+    while(!e.contains(f)){e=e+f
+    f+=l(i%l.length)
+    i+=1}
     f
   }
 }
