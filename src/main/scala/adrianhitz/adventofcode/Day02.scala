@@ -28,7 +28,7 @@ object Day02 extends AdventIO {
       }
       if(commonLetters.length == 25) return commonLetters
     }
-    "No solution found."
+    throw new IllegalArgumentException("No solution")
   }
 
   // @formatter:off

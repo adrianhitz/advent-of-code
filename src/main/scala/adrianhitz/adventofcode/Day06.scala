@@ -6,7 +6,6 @@ object Day06 extends AdventIO {
     // write2(part2.toString)
   }
 
-  // Golf: ? bytes TODO
   def part1(implicit s: String): Unit = {
     val points: Array[Array[Int]] = s.split('\n').map(_.split(", ").map(_.toInt))
     val xRange = (points.map(_ (0)).min, points.map(_ (0)).max)
@@ -17,9 +16,8 @@ object Day06 extends AdventIO {
     for(x <- 0 to height) for(y <- 0 to width) {
 
     }
-
+    // TODO Solve day 06 part 1
   }
 
-  // Golf: ? bytes TODO
-  def part2(implicit s: String): Unit = ???
+  def part2(implicit s: String): Unit = ??? // TODO Solve day 06 part 2
 }

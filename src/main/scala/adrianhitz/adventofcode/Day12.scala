@@ -6,7 +6,6 @@ object Day12 extends AdventIO {
     // write2(part2.toString)
   }
 
-  // Golf: ? bytes TODO
   def part1(implicit s: String): Unit = {
     val lines: Array[String] = s.split('\n')
     val initial: Array[Char] = lines(0).split(' ').last.toCharArray
@@ -22,12 +21,12 @@ object Day12 extends AdventIO {
     var state: Map[Int, Char] = initial.zipWithIndex.map(x => (x._2, x._1)).toMap
     for(i <- 0 until 20) {
 
-
       // Apply function
+
+      // TODO Solve day 12 part 1
     }
 
   }
 
-  // Golf: ? bytes TODO
-  def part2(implicit s: String): Unit = ???
+  def part2(implicit s: String): Unit = ??? // TODO Solve day 12 part 2
 }

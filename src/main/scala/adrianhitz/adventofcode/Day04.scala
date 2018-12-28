@@ -12,7 +12,6 @@ object Day04 extends AdventIO {
     write2(part2.toString)
   }
 
-  // Golf: ? bytes TODO
   def part1(implicit s: String): Int = {
     val dtf = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm")
     val t = s.split('\n').map(_.replace("[", "").split("] "))
@@ -40,7 +39,6 @@ object Day04 extends AdventIO {
     chosenGuard * chosenMinute
   }
 
-  // Golf: ? bytes TODO
   def part2(implicit s: String): Int = {
     val dtf = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm")
     val t = s.split('\n').map(_.replace("[", "").split("] "))

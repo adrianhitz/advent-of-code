@@ -9,10 +9,12 @@ object Day07 extends AdventIO {
     write2(part2.toString)
   }
 
-  // Golf: ? bytes TODO
   def part1(implicit s: String): String = {
     val reqList: Array[(Char, Char)] = s.split('\n').map(x => (x.charAt(5), x.charAt(36)))
-    val reqs = mutable.Map[Char, Set[Char]]() // Map containing all required steps for a given step
+
+    // Map containing all required previous steps for a given step
+    val reqs = mutable.Map[Char, Set[Char]]()
+
     for(req <- reqList) {
       if(!reqs.contains(req._2)) reqs(req._2) = Set()
       reqs(req._2) = reqs(req._2) + req._1
@@ -31,10 +33,12 @@ object Day07 extends AdventIO {
     completed.mkString("")
   }
 
-  // Golf: ? bytes TODO
   def part2(implicit s: String): Int = {
     val reqList: Array[(Char, Char)] = s.split('\n').map(x => (x.charAt(5), x.charAt(36)))
-    val reqs = mutable.Map[Char, Set[Char]]() // Map containing all required steps for a given step
+
+    // Map containing all required previous steps for a given step
+    val reqs = mutable.Map[Char, Set[Char]]()
+
     for(req <- reqList) {
       if(!reqs.contains(req._2)) reqs(req._2) = Set()
       reqs(req._2) = reqs(req._2) + req._1
@@ -43,13 +47,13 @@ object Day07 extends AdventIO {
     val completed = ListBuffer[Char]()
     case class Worker(step: Char, started: Int, duration: Int)
     var workers = List[Worker]()
-    var t = -1
+    var timeWorked = -1
     while(nextSteps.nonEmpty || workers.nonEmpty) {
-      t += 1
+      timeWorked += 1
       // Complete work
       var finished = List[Worker]()
       for(worker <- workers) {
-        if(worker.started + worker.duration <= t) {
+        if(worker.started + worker.duration <= timeWorked) {
           completed.append(worker.step)
           finished :+= worker
         }
@@ -64,11 +68,11 @@ object Day07 extends AdventIO {
       // Assign work
       while(nextSteps.nonEmpty && workers.length < 5) {
         val nextStep = nextSteps.min
-        workers :+= Worker(nextStep, t, nextStep - 'A' + 61)
+        workers :+= Worker(nextStep, timeWorked, nextStep - 'A' + 61)
         nextSteps -= nextStep
         reqs.remove(nextStep)
       }
     }
-    t
+    timeWorked
   }
 }

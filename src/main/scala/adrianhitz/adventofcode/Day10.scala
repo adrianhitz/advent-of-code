@@ -6,7 +6,6 @@ object Day10 extends AdventIO {
     write2(part2.toString)
   }
 
-  // Golf: ? bytes TODO
   def part1(implicit s: String): String = {
     val v: Array[Array[Int]] = s.split('\n').map(x => Array(
       x.substring(10, 16), // position x
@@ -41,7 +40,6 @@ object Day10 extends AdventIO {
     sb.toString
   }
 
-  // Golf: ? bytes TODO
   def part2(implicit s: String): Int = {
     val v: Array[Array[Int]] = s.split('\n').map(x => Array(
       x.substring(10, 16), // position x

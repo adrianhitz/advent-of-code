@@ -32,5 +32,5 @@ object Day08 extends AdventIO {
     metaDataSum
   }
 
-  def part2(implicit s: String): Unit = ???
+  def part2(implicit s: String): Unit = ??? // TODO Solve day 08 part 2
 }

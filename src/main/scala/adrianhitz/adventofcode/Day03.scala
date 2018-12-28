@@ -6,7 +6,6 @@ object Day03 extends AdventIO {
     write2(part2.toString)
   }
 
-  // Golf: ? bytes TODO
   def part1(implicit s: String): Int = {
     val lines = s.split('\n').map(_.replaceAll("(#[0-9]+ @ )| ", "")
       .replaceAll("[:x]", ",")
@@ -21,7 +20,6 @@ object Day03 extends AdventIO {
     fabric.flatten.count(_ >= 2)
   }
 
-  // Golf: ? bytes TODO
   def part2(implicit s: String): Int = {
     val lines = s.split('\n').map(_.replaceAll("[ #]", "")
       .replaceAll("[@:x]", ",")

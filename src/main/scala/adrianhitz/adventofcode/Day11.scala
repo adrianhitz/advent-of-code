@@ -6,7 +6,6 @@ object Day11 extends AdventIO {
     write2(part2.toString)
   }
 
-  // Golf: ? bytes TODO
   def part1(implicit s: String): String = {
     val serial = s.toInt
     val grid = Array.ofDim[Int](301, 301)
@@ -25,7 +24,6 @@ object Day11 extends AdventIO {
     maxCoords._1 + "," + maxCoords._2
   }
 
-  // Golf: ? bytes TODO
   def part2(implicit s: String): String = {
     val serial = s.toInt
     val grid = Array.ofDim[Int](301, 301)
