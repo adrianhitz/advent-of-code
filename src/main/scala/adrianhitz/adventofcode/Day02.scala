@@ -31,7 +31,7 @@ object Day02 extends AdventIO {
     throw new IllegalArgumentException("No solution")
   }
 
-  // @formatter:off
+  // format: off
   // 133 bytes
   def part1golf(implicit s: String): Int = {
     var a,b=0
@@ -40,7 +40,9 @@ object Day02 extends AdventIO {
     if(f(3))b+=1}
     a*b
   }
+  // format: on
 
+  // format: off
   // 112 bytes
   def part2golf(implicit s: String): String = {
     val t=s.split('\n')
@@ -49,4 +51,5 @@ object Day02 extends AdventIO {
     if(s.length==25)return s}
     s
   }
+  // format: on
 }

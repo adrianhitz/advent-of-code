@@ -7,11 +7,14 @@ object Day03 extends AdventIO {
   }
 
   def part1(implicit s: String): Int = {
-    val lines = s.split('\n').map(_.replaceAll("(#[0-9]+ @ )| ", "")
-      .replaceAll("[:x]", ",")
-      .split(',')
-      .map(_.toInt)
-    )
+    val lines = s
+      .split('\n')
+      .map(
+        _.replaceAll("(#[0-9]+ @ )| ", "")
+          .replaceAll("[:x]", ",")
+          .split(',')
+          .map(_.toInt)
+      )
     val fabric = Array.ofDim[Int](1000, 1000)
     for(line <- lines)
       for(x <- line(0) until line(0) + line(2))
@@ -21,11 +24,14 @@ object Day03 extends AdventIO {
   }
 
   def part2(implicit s: String): Int = {
-    val lines = s.split('\n').map(_.replaceAll("[ #]", "")
-      .replaceAll("[@:x]", ",")
-      .split(',')
-      .map(_.toInt)
-    )
+    val lines = s
+      .split('\n')
+      .map(
+        _.replaceAll("[ #]", "")
+          .replaceAll("[@:x]", ",")
+          .split(',')
+          .map(_.toInt)
+      )
     val fabric = Array.ofDim[Int](1000, 1000)
     for(line <- lines)
       for(x <- line(1) until line(1) + line(3))

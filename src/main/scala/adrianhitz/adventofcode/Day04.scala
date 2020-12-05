@@ -14,7 +14,9 @@ object Day04 extends AdventIO {
 
   def part1(implicit s: String): Int = {
     val dtf = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm")
-    val t = s.split('\n').map(_.replace("[", "").split("] "))
+    val t = s
+      .split('\n')
+      .map(_.replace("[", "").split("] "))
       .map(x => (LocalDateTime.parse(x(0), dtf), x(1)))
       .sortWith((a: (LocalDateTime, String), b: (LocalDateTime, String)) => a._1.compareTo(b._1) < 0)
     var guardId = 0
@@ -41,7 +43,9 @@ object Day04 extends AdventIO {
 
   def part2(implicit s: String): Int = {
     val dtf = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm")
-    val t = s.split('\n').map(_.replace("[", "").split("] "))
+    val t = s
+      .split('\n')
+      .map(_.replace("[", "").split("] "))
       .map(x => (LocalDateTime.parse(x(0), dtf), x(1)))
       .sortWith((a: (LocalDateTime, String), b: (LocalDateTime, String)) => a._1.compareTo(b._1) < 0)
     var guardId = 0

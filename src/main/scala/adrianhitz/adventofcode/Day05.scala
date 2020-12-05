@@ -30,7 +30,7 @@ object Day05 extends AdventIO {
     shortestPolymerLength
   }
 
-  // @formatter:off
+  // format: off
   // 93 bytes
   def part1golf(implicit s: String): Int = {
     var t=s
@@ -39,7 +39,9 @@ object Day05 extends AdventIO {
     t=t.replaceAll("(\\w)(?!\\1)(?i:\\1)","")}
     l
   }
+  // format: on
 
+  // format: off
   // 202 bytes
   def part2golf(implicit s: String): Int = {
     var m=99999
@@ -50,4 +52,5 @@ object Day05 extends AdventIO {
     m=Math.min(m,l)}
     m
   }
+  //format: on
 }

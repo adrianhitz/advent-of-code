@@ -8,14 +8,12 @@ object Day06 extends AdventIO {
 
   def part1(implicit s: String): Unit = {
     val points: Array[Array[Int]] = s.split('\n').map(_.split(", ").map(_.toInt))
-    val xRange = (points.map(_ (0)).min, points.map(_ (0)).max)
-    val yRange = (points.map(_ (1)).min, points.map(_ (1)).max)
+    val xRange = (points.map(_(0)).min, points.map(_(0)).max)
+    val yRange = (points.map(_(1)).min, points.map(_(1)).max)
     val height = xRange._2 - xRange._1 + 1
     val width = yRange._2 - yRange._1 + 1
     val grid = Array.ofDim[Int](height, width)
-    for(x <- 0 to height) for(y <- 0 to width) {
-
-    }
+    for(x <- 0 to height) for(y <- 0 to width) {}
     // TODO Solve day 06 part 1
   }
 

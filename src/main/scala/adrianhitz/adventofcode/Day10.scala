@@ -7,12 +7,16 @@ object Day10 extends AdventIO {
   }
 
   def part1(implicit s: String): String = {
-    val v: Array[Array[Int]] = s.split('\n').map(x => Array(
-      x.substring(10, 16), // position x
-      x.substring(17, 24), // position y
-      x.substring(36, 38), // velocity x
-      x.substring(39, 42) // velocity y
-    ).map(_.trim.toInt))
+    val v: Array[Array[Int]] = s
+      .split('\n')
+      .map(x =>
+        Array(
+          x.substring(10, 16), // position x
+          x.substring(17, 24), // position y
+          x.substring(36, 38), // velocity x
+          x.substring(39, 42) // velocity y
+        ).map(_.trim.toInt)
+      )
     var sb = new StringBuilder("No solution found")
     for(t <- 0 to 100000) {
       val points = new Array[(Int, Int)](v.length)
@@ -41,12 +45,16 @@ object Day10 extends AdventIO {
   }
 
   def part2(implicit s: String): Int = {
-    val v: Array[Array[Int]] = s.split('\n').map(x => Array(
-      x.substring(10, 16), // position x
-      x.substring(17, 24), // position y
-      x.substring(36, 38), // velocity x
-      x.substring(39, 42) // velocity y
-    ).map(_.trim.toInt))
+    val v: Array[Array[Int]] = s
+      .split('\n')
+      .map(x =>
+        Array(
+          x.substring(10, 16), // position x
+          x.substring(17, 24), // position y
+          x.substring(36, 38), // velocity x
+          x.substring(39, 42) // velocity y
+        ).map(_.trim.toInt)
+      )
     val tMax = 100000
     var tWhenFound = tMax
     var sb = new StringBuilder("No solution found")

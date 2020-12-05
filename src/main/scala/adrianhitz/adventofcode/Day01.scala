@@ -22,7 +22,8 @@ object Day01 extends AdventIO {
     currentFreq
   }
 
-  // 111 bytes, @formatter:off
+  // format: off
+  // 111 bytes
   def part2golf(implicit s: String): Int = {
     var e=Set[Int]()
     val l=s.split('\n').map(_.toInt)
@@ -32,4 +33,5 @@ object Day01 extends AdventIO {
     i+=1}
     f
   }
+  // format: on
 }

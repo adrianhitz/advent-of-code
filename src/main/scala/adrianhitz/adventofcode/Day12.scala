@@ -18,7 +18,7 @@ object Day12 extends AdventIO {
       val upperBoundary = state.rightmost + 2
       for(i <- lowerBoundary to upperBoundary) {
         // find matching rule and update new state
-        val in: List[Boolean] = state.get(i-2, i+3)
+        val in: List[Boolean] = state.get(i - 2, i + 3)
         val out = rules.filter(_.in == in).head.out
         if(out) newState.add(i)
       }
@@ -39,12 +39,13 @@ object Day12 extends AdventIO {
 
     val initialState: State = State.fromString(stateInput)
 
-    val rules = ruleInput.map(s => {
-      val in = s.slice(0, 5).map(_ == '#').toList
-      val out = s(9) == '#'
-      Rule(in, out)
-    }).toList
-
+    val rules = ruleInput
+      .map(s => {
+        val in = s.slice(0, 5).map(_ == '#').toList
+        val out = s(9) == '#'
+        Rule(in, out)
+      })
+      .toList
 
     (initialState, rules)
   }
@@ -73,8 +74,7 @@ class State(private var set: Set[Int]) {
 
 object State {
   def fromString(s: String): State = {
-    val set = s.toCharArray
-      .zipWithIndex
+    val set = s.toCharArray.zipWithIndex
       .filter(_._1 == '#')
       .map(_._2)
       .toSet
