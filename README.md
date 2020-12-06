@@ -1,3 +1,3 @@
-# Advent of Code
+# advent-of-code-2018
 
-My solutions for [Advent of Code](https://adventofcode.com) tasks. Trying to come up with the shortest possible Scala programs.
+My solutions for the 2018 [Advent of Code](https://adventofcode.com) puzzles.
