@@ -3,7 +3,7 @@ package adrianhitz.adventofcode
 object Day12 extends AdventIO {
   override def main(args: Array[String]): Unit = {
     write1(part1.toString)
-    // write2(part2.toString)
+    write2(part2.toString)
   }
 
   def part1(implicit s: String): Int = {
@@ -27,8 +27,47 @@ object Day12 extends AdventIO {
     state.getIndicesWithPlants.sum
   }
 
-  def part2(implicit s: String): Unit = {
-    ???
+  def part2(implicit s: String): Long = {
+    val (initialState, rules) = parseInput(s)
+    val targetGens = 50_000_000_000L
+
+    var state = initialState
+    var gens = 0
+    var previousDelta = 0
+    var deltaRepeats = 0
+
+    while(gens < 1000 || deltaRepeats < 10) {
+      val newState = new State()
+
+      val lowerBoundary = state.leftmost - 2
+      val upperBoundary = state.rightmost + 2
+      for(i <- lowerBoundary to upperBoundary) {
+        // find matching rule and update new state
+        val in: List[Boolean] = state.get(i - 2, i + 3)
+        val out = rules.filter(_.in == in).head.out
+        if(out) newState.add(i)
+      }
+
+      val sum = state.getIndicesWithPlants.sum
+      val newSum = newState.getIndicesWithPlants.sum
+
+      val delta = newSum - sum
+      if(delta == previousDelta) {
+        deltaRepeats += 1
+      } else {
+        deltaRepeats = 0
+        previousDelta = delta
+      }
+
+      // Update
+      gens += 1
+      state = newState
+    }
+
+    // Extrapolate
+    val remainingGens = targetGens - gens
+    val extrapolatedSum = remainingGens * previousDelta
+    state.getIndicesWithPlants.sum + extrapolatedSum
   }
 
   def parseInput(s: String): (State, List[Rule]) = {
