@@ -8,23 +8,14 @@ object Day12 extends AdventIO {
 
   def part1(implicit s: String): Int = {
     val (initialState, rules) = parseInput(s)
-    val numGenerations = 20
+    val targetGens = 20
 
     var state = initialState
-    for(_ <- 0 until numGenerations) {
-      val newState = new State()
-
-      val lowerBoundary = state.leftmost - 2
-      val upperBoundary = state.rightmost + 2
-      for(i <- lowerBoundary to upperBoundary) {
-        // find matching rule and update new state
-        val in: List[Boolean] = state.get(i - 2, i + 3)
-        val out = rules.filter(_.in == in).head.out
-        if(out) newState.add(i)
-      }
-      state = newState
+    for(_ <- 0 until targetGens) {
+      state = State.calculateNextState(state, rules)
     }
-    state.getIndicesWithPlants.sum
+
+    state.getSum
   }
 
   def part2(implicit s: String): Long = {
@@ -36,22 +27,15 @@ object Day12 extends AdventIO {
     var previousDelta = 0
     var deltaRepeats = 0
 
+    // Loop until the growth becomes constant over 10 generations
     while(gens < 1000 || deltaRepeats < 10) {
-      val newState = new State()
+      // Update state & save sums
+      val previousSum = state.getSum
+      state = State.calculateNextState(state, rules)
+      val sum = state.getSum
 
-      val lowerBoundary = state.leftmost - 2
-      val upperBoundary = state.rightmost + 2
-      for(i <- lowerBoundary to upperBoundary) {
-        // find matching rule and update new state
-        val in: List[Boolean] = state.get(i - 2, i + 3)
-        val out = rules.filter(_.in == in).head.out
-        if(out) newState.add(i)
-      }
-
-      val sum = state.getIndicesWithPlants.sum
-      val newSum = newState.getIndicesWithPlants.sum
-
-      val delta = newSum - sum
+      // Check whether the delta has changed
+      val delta = sum - previousSum
       if(delta == previousDelta) {
         deltaRepeats += 1
       } else {
@@ -59,15 +43,13 @@ object Day12 extends AdventIO {
         previousDelta = delta
       }
 
-      // Update
       gens += 1
-      state = newState
     }
 
     // Extrapolate
     val remainingGens = targetGens - gens
     val extrapolatedSum = remainingGens * previousDelta
-    state.getIndicesWithPlants.sum + extrapolatedSum
+    state.getSum + extrapolatedSum
   }
 
   def parseInput(s: String): (State, List[Rule]) = {
@@ -99,16 +81,13 @@ class State(private var set: Set[Int]) {
   def leftmost: Int = set.min
   def rightmost: Int = set.max
 
-  // def get(i: Int): Boolean = ???
   def get(from: Int, until: Int): List[Boolean] =
     (from until until).map(set.contains(_)).toList
 
-  def add(i: Int): Unit =
+  private def add(i: Int): Unit =
     set += i
 
-  def getIndicesWithPlants: List[Int] =
-    set.toList
-
+  def getSum: Int = set.toList.sum
 }
 
 object State {
@@ -118,5 +97,17 @@ object State {
       .map(_._2)
       .toSet
     new State(set)
+  }
+
+  def calculateNextState(state: State, rules: List[Rule]): State = {
+    val newState = new State()
+
+    for(i <- (state.leftmost - 2) to (state.rightmost + 2)) {
+      // find matching rule and update new state
+      val in: List[Boolean] = state.get(i - 2, i + 3)
+      val out = rules.filter(_.in == in).head.out
+      if(out) newState.add(i)
+    }
+    newState
   }
 }
